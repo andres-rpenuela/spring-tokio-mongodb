@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "4ee4beeb-ba89-4339-978c-d62990eaac75",
+		"name": "MongoDBApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6232761"
+	},
+	"item": [
+		{
+			"name": "Get all products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add prodcut",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"name\": \"coca-cola\",\r\n        \"description\": \"un refresco\",\r\n        \"category\": null,\r\n        \"price\": 3.12,\r\n        \"taxes\": 0.0,\r\n        \"discount\": null,\r\n        \"stock\": 10,\r\n        \"createdAt\": null,\r\n        \"updatedAt\": null\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
