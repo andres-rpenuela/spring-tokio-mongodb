@@ -61,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
         return Optional.ofNullable(category)
                 .map(StringUtils::stripToNull)
                 .map(productDao::findByCategory)
-                .orElseGet(Collections::emptyList)
+                .orElseGet(productDao::findByCategoryIsNullOrDoesNotExistOrEmpty)
                 .stream()
                 .map(product -> modelMapper.map(product, ProductDto.class))
                 .toList();

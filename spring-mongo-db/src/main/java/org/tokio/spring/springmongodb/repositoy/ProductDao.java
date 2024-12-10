@@ -18,4 +18,13 @@ public interface ProductDao extends MongoRepository<Product, String> {
 
     @Query("{ 'category' :  { $regex:  ?0 } }")
     List<Product> findByCategory(String regexCategory);
+
+    // query method
+    @Query("{$or: [ " +
+            "  { 'category': null }, " +               // Caso 1: category es null
+            "  { 'category': { $exists: false } }, " + // Caso 2: category no existe
+            "  { 'category': { $size: 0 } } " +        // Caso 3: category es una lista vacía
+            "]}")
+    List<Product> findByCategoryIsNullOrDoesNotExistOrEmpty();
+
 }

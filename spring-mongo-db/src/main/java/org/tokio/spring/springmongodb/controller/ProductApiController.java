@@ -32,7 +32,7 @@ public class ProductApiController {
     }
 
     @GetMapping(value = "/products/by-category",produces =  "application/json")
-    public ResponseEntity<List<ProductDto>> getProductByCategoryHandler(@RequestParam(name = "category",defaultValue = StringUtils.EMPTY) String category){
+    public ResponseEntity<List<ProductDto>> getProductByCategoryHandler(@RequestParam(name = "category",defaultValue = StringUtils.EMPTY,required = false) String category){
         return ResponseEntity.ok(productService.findByCategory(category));
     }
 
