@@ -57,6 +57,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductDto> findByCategory(String category) {
+        return Optional.ofNullable(category)
+                .map(StringUtils::stripToNull)
+                .map(productDao::findByCategory)
+                .orElseGet(Collections::emptyList)
+                .stream()
+                .map(product -> modelMapper.map(product, ProductDto.class))
+                .toList();
+    }
+
+    @Override
     public ProductDto addProduct(ProductDto productDto) {
         Product product = new Product();
         populationCreateOrUpdate(product,productDto);

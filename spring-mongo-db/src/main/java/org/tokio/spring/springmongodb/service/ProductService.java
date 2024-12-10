@@ -8,6 +8,9 @@ public interface ProductService {
     List<ProductDto> findByName(String name);
     List<ProductDto> getAllProducts();
     List<ProductDto> findBetweenStock(int minStock, int maxStock);
+    List<ProductDto> findByCategory(String category);
 
     ProductDto addProduct(ProductDto productDto);
+
+
 }

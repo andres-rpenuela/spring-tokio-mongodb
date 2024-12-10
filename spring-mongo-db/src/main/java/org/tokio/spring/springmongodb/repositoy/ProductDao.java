@@ -15,4 +15,7 @@ public interface ProductDao extends MongoRepository<Product, String> {
 
     @Query("{ 'stock_quantity' :  { $gt:  ?0, $lt:  ?1 } }")
     List<Product> findBetweenStock(int lower, int higher);
+
+    @Query("{ 'category' :  { $regex:  ?0 } }")
+    List<Product> findByCategory(String regexCategory);
 }

@@ -31,6 +31,11 @@ public class ProductApiController {
         return ResponseEntity.ok(productService.findByName(name));
     }
 
+    @GetMapping(value = "/products/by-category",produces =  "application/json")
+    public ResponseEntity<List<ProductDto>> getProductByCategoryHandler(@RequestParam(name = "category",defaultValue = StringUtils.EMPTY) String category){
+        return ResponseEntity.ok(productService.findByCategory(category));
+    }
+
     @GetMapping(value = "/products/stock",produces =  "application/json")
     public ResponseEntity<List<ProductDto>> getProductByNameHandler(
             @RequestParam(name = "minStock",defaultValue = "0") int minStock,
