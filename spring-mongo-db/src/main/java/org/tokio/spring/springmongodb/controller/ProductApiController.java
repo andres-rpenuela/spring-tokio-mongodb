@@ -1,12 +1,10 @@
 package org.tokio.spring.springmongodb.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.tokio.spring.springmongodb.dto.ProductDto;
 import org.tokio.spring.springmongodb.service.ProductService;
 
@@ -26,6 +24,11 @@ public class ProductApiController {
     @GetMapping(value = "/products",produces =  "application/json")
     public ResponseEntity<List<ProductDto>> getProductsHandler(){
         return ResponseEntity.ok(productService.getAllProducts());
+    }
+
+    @GetMapping(value = "/products/by-name",produces =  "application/json")
+    public ResponseEntity<List<ProductDto>> getProductByNameHandler(@RequestParam(name = "name",defaultValue = StringUtils.EMPTY) String name){
+        return ResponseEntity.ok(productService.findByName(name));
     }
 
     @PostMapping(value = "/products",consumes = "application/json", produces =  "application/json")
