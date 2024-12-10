@@ -3,12 +3,17 @@ package org.tokio.spring.springmongodb.service.impl;
 import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.tokio.spring.springmongodb.domain.Product;
 import org.tokio.spring.springmongodb.dto.ProductDto;
 import org.tokio.spring.springmongodb.repositoy.ProductDao;
 import org.tokio.spring.springmongodb.service.ProductService;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -21,11 +26,13 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductDao productDao;
     private final ModelMapper modelMapper;
+    private final MongoTemplate mongoTemplate;
 
     @Autowired
-    public ProductServiceImpl(ProductDao productDao, ModelMapper modelMapper) {
+    public ProductServiceImpl(ProductDao productDao, ModelMapper modelMapper, MongoTemplate mongoTemplate) {
         this.productDao = productDao;
         this.modelMapper = modelMapper;
+        this.mongoTemplate = mongoTemplate;
     }
 
     @Override
@@ -64,6 +71,19 @@ public class ProductServiceImpl implements ProductService {
                 .orElseGet(productDao::findByCategoryIsNullOrDoesNotExistOrEmpty)
                 .stream()
                 .map(product -> modelMapper.map(product, ProductDto.class))
+                .toList();
+    }
+
+    @Override
+    public List<ProductDto> findStockAndPrice(int stock, BigDecimal price) {
+        Query query = new Query(); // De mongodb
+        query.with( Sort.by("stock").descending())
+                .limit(10)
+                .addCriteria(Criteria.where("stock_quantity").lte(stock))
+                .addCriteria(Criteria.where("price").is(price));
+        return mongoTemplate.find(query, Product.class)
+                .stream()
+                .map(product -> modelMapper.map(product,ProductDto.class))
                 .toList();
     }
 

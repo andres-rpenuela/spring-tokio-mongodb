@@ -52,6 +52,119 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get product by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/by-name?name=coca-cola",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"by-name"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "coca-cola"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get prodcuts between stock",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/stock?minStock=0&maxStock=1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"stock"
+					],
+					"query": [
+						{
+							"key": "minStock",
+							"value": "0"
+						},
+						{
+							"key": "maxStock",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Prodcuts by Category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/by-category?category=drink",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"by-category"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "drink"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get produtcs by stock and price",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/stock-and-price?price=3.12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"stock-and-price"
+					],
+					"query": [
+						{
+							"key": "stock",
+							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "price",
+							"value": "3.12"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.tokio.spring.springmongodb.dto.ProductDto;
 import org.tokio.spring.springmongodb.service.ProductService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -42,6 +43,14 @@ public class ProductApiController {
             @RequestParam(name = "maxStock",defaultValue = "0") int maxStock){
         return ResponseEntity.ok(productService.findBetweenStock(minStock,maxStock));
     }
+
+    @GetMapping(value = "/products/stock-and-price",produces =  "application/json")
+    public ResponseEntity<List<ProductDto>> getProductByNameHandler(
+            @RequestParam(name = "stock",defaultValue = "0",required = false) int stock,
+            @RequestParam(name = "price",defaultValue = "100000",required = false) BigDecimal price){
+        return ResponseEntity.ok(productService.findStockAndPrice(stock,price));
+    }
+
     @PostMapping(value = "/products",consumes = "application/json", produces =  "application/json")
     public ResponseEntity<ProductDto> postProductsHandler(@RequestBody ProductDto productDto){
         return ResponseEntity.ok(productService.addProduct(productDto));
