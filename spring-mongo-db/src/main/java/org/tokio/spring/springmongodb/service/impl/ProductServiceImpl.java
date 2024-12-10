@@ -49,6 +49,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductDto> findBetweenStock(int minStock, int maxStock) {
+        return productDao.findBetweenStock(minStock,maxStock)
+                .stream()
+                .map(product -> modelMapper.map(product, ProductDto.class))
+                .toList();
+    }
+
+    @Override
     public ProductDto addProduct(ProductDto productDto) {
         Product product = new Product();
         populationCreateOrUpdate(product,productDto);

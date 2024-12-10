@@ -31,6 +31,12 @@ public class ProductApiController {
         return ResponseEntity.ok(productService.findByName(name));
     }
 
+    @GetMapping(value = "/products/stock",produces =  "application/json")
+    public ResponseEntity<List<ProductDto>> getProductByNameHandler(
+            @RequestParam(name = "minStock",defaultValue = "0") int minStock,
+            @RequestParam(name = "maxStock",defaultValue = "0") int maxStock){
+        return ResponseEntity.ok(productService.findBetweenStock(minStock,maxStock));
+    }
     @PostMapping(value = "/products",consumes = "application/json", produces =  "application/json")
     public ResponseEntity<ProductDto> postProductsHandler(@RequestBody ProductDto productDto){
         return ResponseEntity.ok(productService.addProduct(productDto));

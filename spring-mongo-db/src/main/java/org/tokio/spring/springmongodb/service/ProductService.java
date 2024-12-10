@@ -7,5 +7,7 @@ import java.util.List;
 public interface ProductService {
     List<ProductDto> findByName(String name);
     List<ProductDto> getAllProducts();
+    List<ProductDto> findBetweenStock(int minStock, int maxStock);
+
     ProductDto addProduct(ProductDto productDto);
 }
